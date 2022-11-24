@@ -3,11 +3,11 @@
                     <p class="text-2xl my-3">Danh sach tai khoan</p>
                     <div class=" py-3 rounded-t-xl">
                         <div class="grid grid-cols-[75%_25%] items-center mb-3 ">
-                            <form action="">
+                            <form action="index.php?act=tai_khoan" method="post">
                                 <div class="flex items-center">
-                                    <input class="py-1 w-64 px-3 rounded-l-2xl border-2" placeholder="Nhap tu khoa tim kiem"
+                                    <input class="py-1 w-64 px-3 rounded-l-2xl border-2" name="kyw" placeholder="Nhap tu khoa tim kiem"
                                         type="text">
-                                    <button class="py-2 px-3 bg-slate-200 rounded-r-2xl border-2">
+                                    <button type="submit" name="btn_search" class="py-2 px-3 bg-slate-200 rounded-r-2xl border-2">
                                         <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                             <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
                                             <path
