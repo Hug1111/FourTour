@@ -5,13 +5,13 @@
                             <tr>
                                 <td>
                                     <p class="px-2 text-lg">Tên Slider</p>
-                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="text" name="name">
-                                    <p class="text-sm text-red-400 mx-2">moi nhap ten</p>
+                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="text" name="name" value="<?php echo isset($name)?$name:'' ?>">
+                                    <p class="text-sm text-red-400 mx-2"><?php echo !empty(eror_user($name))?eror_user($name):'Da xac nhan' ?></p>
                                 </td>
                                 <td>
                                     <p class="px-2 text-lg">Url</p>
-                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="text" name="url">
-                                    <p class="text-sm text-red-400 mx-2 ">moi nhap ten</p>
+                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="text" name="url" value="<?php echo isset($url)?$url:'' ?>">
+                                    <p class="text-sm text-red-400 mx-2 "><?php echo !empty(eror_user($url))?eror_user($url):'Da xac nhan' ?></p>
                                 </td>
                             </tr>
                             <tr>
@@ -24,7 +24,8 @@
                             <tr>
                                 <td colspan="2">
                                     <p class="px-2 text-lg">Mo ta</p>
-                                    <textarea name="moTa" id="" class="w-11/12 mx-7" cols="50" rows="5"></textarea>
+                                    <textarea name="moTa" id="" class="w-11/12 mx-7" cols="50" rows="5"><?php echo isset($moTa)?$moTa:'' ?></textarea>
+                                    <p class="text-sm text-red-400 mx-2 "><?php echo !empty(eror_user($moTa))?eror_user($moTa):'Da xac nhan' ?></p>
                                     
                                 </td>
                             </tr>
