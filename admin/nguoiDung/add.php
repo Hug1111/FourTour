@@ -5,44 +5,43 @@
                             <tr>
                                 <td>
                                     <p class="px-2 text-lg">Họ và tên</p>
-                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="text" name="ten">
-                                    <p class="text-sm text-red-400 mx-2">moi nhap ten</p>
+                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="text" name="ten" value="<?php echo isset($name)?$name:'' ?>" >
+                                    <p class="text-sm text-red-400 mx-2"><?php echo !empty(eror_user($name))?eror_user($name):'Da xac nhan' ?></p>
                                 </td>
                                 <td>
                                     <p class="px-2 text-lg">Email</p>
-                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="text" name="email">
-                                    <p class="text-sm text-red-400 mx-2 ">moi nhap ten</p>
+                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="email" name="email" value="<?php echo isset($email)?$email:'' ?>">
+                                    <p class="text-sm text-red-400 mx-2 "><?php echo !empty(eror_user($email))?eror_user($email):'Da xac nhan' ?></p>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <p class="px-2 text-lg">Địa chỉ</p>
-                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="text" name="address">
-                                    <p class="text-sm text-red-400 mx-2">moi nhap ten</p>
+                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="text" name="address" value="<?php echo isset($address)?$address:'' ?>">
+                                    <p class="text-sm text-red-400 mx-2"><?php echo !empty(eror_user($address))?eror_user($address):'Da xac nhan' ?></p>
                                 </td>
                                 <td>
                                     <p class="px-2 text-lg">Số Điện thoại</p>
-                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="text" name="tel">
-                                    <p class="text-sm text-red-400 mx-2">moi nhap ten</p>
+                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="text" name="tel" value="<?php echo isset($tel)?$tel:'' ?>">
+                                    <p class="text-sm text-red-400 mx-2"><?php echo !empty(eror_len($tel))?eror_len($tel):'Da xac nhan'  ?></p>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <p class="px-2 text-lg">Username</p>
-                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="text" name="username">
-                                    <p class="text-sm text-red-400 mx-2">moi nhap ten</p>
+                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="text" name="username" value="<?php echo isset($username)?$username:'' ?>">
+                                    <p class="text-sm text-red-400 mx-2"><?php echo !empty(eror_user($username))?eror_user($username):'Da xac nhan'  ?></p>
                                 </td>
                                 <td>
                                     <p class="px-2 text-lg">Password</p>
-                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="text" name="password">
-                                    <p class="text-sm text-red-400 mx-2">moi nhap ten</p>
+                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="password" name="password" value="<?php echo isset($pass)?$pass:'' ?>">
+                                    <p class="text-sm text-red-400 mx-2"><?php echo !empty(eror_user($pass))?eror_user($pass):'Da xac nhan'  ?></p>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="2">
                                     <p class="px-2 text-lg">Image</p>
                                     <input class="text-sm ml-2" type="file" name="img_user">
-                                    <p class="text-sm text-red-400 mx-2">moi nhap ten</p>
                                 </td>
                             </tr>
                             <tr>
