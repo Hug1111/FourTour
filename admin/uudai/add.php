@@ -4,14 +4,14 @@
                         <table class="w-full bg-slate-100 rounded-lg">
                             <tr>
                                 <td>
-                                    <p class="px-2 text-lg">Tên Slider</p>
-                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="text" name="name">
-                                    <p class="text-sm text-red-400 mx-2">moi nhap ten</p>
+                                    <p class="px-2 text-lg">Tên Uu dai</p>
+                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="text" name="name" value="<?php echo isset($name)?$name:'' ?>">
+                                    <p class="text-sm text-red-400 mx-2"><?php echo !empty(eror_user($name))?eror_user($name):'Da xac nhan' ?></p>
                                 </td>
                                 <td>
                                     <p class="px-2 text-lg">Gia tri</p>
-                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="number" placeholder="%" name="giaTri">
-                                    <p class="text-sm text-red-400 mx-2 ">moi nhap ten</p>
+                                    <input class="px-2 py-[2px] border w-11/12 mx-2" type="number" placeholder="%" name="giaTri"value="<?php echo isset($giaTri)?$giaTri:'' ?>">
+                                    <p class="text-sm text-red-400 mx-2 "><?php echo !empty(eror_user($giaTri))?eror_user($giaTri):'Da xac nhan' ?></p>
                                 </td>
                             </tr>
                             <tr>
@@ -58,7 +58,7 @@
                                 <a href="index.php?act=uu_dai">List</a>
                             </button>
                         </div>
-
+                    <?php echo isset($tb)?$tb:''; ?>
                     </form>
 
                 </div>
