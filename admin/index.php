@@ -3,9 +3,18 @@ require_once "../model/pdo.php";
 require_once '../model/nguoiDung.php';
 require_once '../model/uudai.php';
 require_once '../model/slider.php';
+require_once '../model/theloai.php';
+require_once '../model/diadiem.php';
+require_once '../model/tour.php';
+require_once '../model/setting.php';
+require_once '../model/erorr.php';
 
 include_once 'header.php';
 // Controller
+// bien tong
+$list_dd=select_all_dd();
+$list_tl=select_all_tl();
+$list_ud=select_all_ud();
 if (isset($_GET['act'])) {
     $act=$_GET['act'];
     switch ($act) {
@@ -20,9 +29,18 @@ if (isset($_GET['act'])) {
                 $role=$_POST['role'];
                 $img=$_FILES['img_user'];
                 $image_name=$img['name'];
-                move_uploaded_file($img['tmp_name'],"../image/".$image_name);
-                insert_user($name,$address,$tel,$email,$image_name,$username,$pass,$role);
-                $tb='Them thanh cong';
+                if ((empty(eror_user($name))&&empty(eror_user($email))&&empty(eror_user($address))&&empty(eror_user($tel))&&empty(eror_user($address))&&empty(eror_user($username))&&empty(eror_user($pass)))) {
+                    move_uploaded_file($img['tmp_name'],"../image/".$image_name);
+                    insert_user($name,$address,$tel,$email,$image_name,$username,$pass,$role);
+                    $tb='Them thanh cong';
+                }
+            }else {
+                $name='';
+                $email='';
+                $address='';
+                $tel='';
+                $username='';
+                $pass='';
             }   
             include 'nguoiDung/add.php';
             break;
@@ -70,7 +88,12 @@ if (isset($_GET['act'])) {
             include 'nguoiDung/list.php';
             break; 
         case 'tai_khoan':
-            $list_user=select_user_all();
+            if (isset($_POST['btn_search'])) {
+                $kyw=$_POST['kyw'];
+            }else {
+                $kyw='';
+            }
+            $list_user=select_user_all($kyw);
             include 'nguoiDung/list.php';
             break;
         case 'slider':
@@ -115,9 +138,15 @@ if (isset($_GET['act'])) {
                 $moTa=$_POST['moTa'];
                 $img=$_FILES['img'];
                 $image_name=$img['name'];
-                move_uploaded_file($img['tmp_name'],"../image/".$image_name);
-                insert_slider($name,$image_name,$moTa,$url);
-                $tb='Them thanh cong';
+                if (empty(eror_user($name))&&empty(eror_user($url))&&empty(eror_user($moTa))) {
+                    move_uploaded_file($img['tmp_name'],"../image/".$image_name);
+                    insert_slider($name,$image_name,$moTa,$url);
+                    $tb='Them thanh cong';
+                }
+            }else {
+                $name='';
+                $url='';
+                $moTa='';
             }
             include 'slider/add.php';
             break;
@@ -127,7 +156,13 @@ if (isset($_GET['act'])) {
                     $giaTri=$_POST['giaTri'];
                     $start = date('Y-m-d', strtotime($_POST['dateFrom']));
                     $end = date('Y-m-d', strtotime($_POST['date']));
-                    insert_ud($name,$giaTri,$start,$end);
+                    if (empty(eror_user($name))&&empty(eror_user($giaTri))) {
+                        insert_ud($name,$giaTri,$start,$end);
+                        $tb='Them thanh cong';
+                    } 
+                }else {
+                    $name='';
+                    $giaTri='';
                 }
             include 'uudai/add.php';
             break;
@@ -160,14 +195,132 @@ if (isset($_GET['act'])) {
             $list_ud=select_all_ud();
             include 'uudai/list.php';
             break;
+        case 'add_dd':
+            
+            break;
         case 'dia_diem':
-            echo 'dia diem';
+            break;
+        case 'add_t':
+            if (isset($_POST['btn_insert'])) {
+                $name=$_POST['name'];
+                $address_t=$_POST['address_tour'];
+                $price=$_POST['price'];
+                $id_address=$_POST['diadiem'];
+                $soLuong=$_POST['soluong'];
+                $soNgay=$_POST['soNgay'];
+                $img=$_FILES['file'];
+                $image_name=$img['name'];
+                
+                $magiamgia=$_POST['giamGia'];
+                $loai=$_POST['loai'];
+                $moTa=$_POST['moTa'];
+                if (empty(eror_user($name))&&empty(eror_user($address_t))&&empty(eror_user($price))&&empty(eror_user($soLuong))&&empty(eror_user($soNgay))&&empty(eror_user($moTa))) {
+                move_uploaded_file($img['tmp_name'],"../image/".$image_name);
+                insert_t($id_address,$loai,$name,$price,$soLuong,$moTa,$address_t,$image_name,$soNgay,$magiamgia);
+                $tb='Them Thanh cong';
+                }
+            }else {
+                $name='';
+                $address_t='';
+                $price='';
+                $soLuong='';
+                $soNgay='';
+                $moTa='';
+            }
+            include 'tour/add.php';
+            break;
+        case 'update_t':
+            if (isset($_POST['btn_update'])) {
+                $id=$_POST['id'];
+                $name=$_POST['name'];
+                $address_tour=$_POST['address_tour'];
+                $price=$_POST['price'];
+                $diaDiem=$_POST['diaDiem'];
+                $soLuong=$_POST['soLuong'];
+                $soNgay=$_POST['soNgay'];
+                if ($_FILES['file']['name']!='') {
+                    $img=$_FILES['file'];
+                    $image_name=$img['name'];
+                    move_uploaded_file($img['tmp_name'],"../image/".$image_name);
+                }else{
+                    $image_name=$_POST['img'];
+                }
+                // $giamGia=$_POST['giamGia'];
+                $loai=$_POST['loai'];
+                $moTa=$_POST['moTa'];
+                $giamGia=$_POST['giamGia'];
+                update_t($diaDiem,$loai,$name,$price,$soLuong,$moTa,$address_tour,$image_name,$soNgay,$giamGia,$id);
+            }
+            $list_t=select_all_t();
+            include 'tour/list.php';
+            break;
+        case 'del_t':
+                if (isset($_GET['id'])) {
+                    delete_t($_GET['id']);
+                }
+                $list_t=select_all_t();
+                include 'tour/list.php';
+            break;
+        case 'edit_t':
+            if (isset($_GET['id'])) {
+                $tour=select_t_one($_GET['id']);
+            }
+            include 'tour/edit.php';
+            break;
+        case 'chitiettour':
+            if (isset($_GET['id'])) {
+                $tour=select_t_one($_GET['id']);
+                $loai=select_tl_one($tour['id_loai']);
+                $diadiem=select_dd_one($tour['id_address']);
+            }
+            include 'tour/detail.php';
             break;
         case 'tour':
-            echo 'Tour du lich';
+            if (isset($_POST['btn_search'])) {
+                $kyw=$_POST['kyw'];
+            }else {
+                $kyw='';
+            }
+            $list_t=select_all_t($kyw);
+            include 'tour/list.php';
+            break;
+        case 'add_tl':
+                if (isset($_POST['btn_insert'])) {
+                    $name=$_POST['name'];
+                    if (empty(eror_user($name))) {
+                        insert_tl($name);
+                        $tb='Them Thanh cong';
+                    }
+                }else {
+                    $name='';
+                }
+                include 'theloai/add.php';
+            break;
+        case 'update_tl':
+                if (isset($_POST['btn_update'])) {
+                    $id=$_POST['id'];
+                    $name=$_POST['name'];
+                    update_tl($name,$id);
+                }
+                $list_tl=select_all_tl();
+                include 'theloai/list.php';
+            break;
+        case 'del_tl':
+                if (isset($_GET['id'])) {
+                    del_tl($_GET['id']);
+                }
+                $list_tl=select_all_tl();
+                include 'theloai/list.php';
+                break;
+        case 'edit_tl':
+                if (isset($_GET['id'])) {
+                    $loai=select_tl_one($_GET['id']);
+                    include 'theloai/edit.php';
+                }
             break;
         case 'the_loai':
-            echo 'The loai';
+            $list_tl=select_all_tl();
+            include 'theloai/list.php';
             break;
         case 'dich_vu':
             echo 'Dich vu day e oi';
@@ -185,10 +338,40 @@ if (isset($_GET['act'])) {
             echo 'thong ke';
             break;
         case 'setting':
-            echo 'Setting';
+            if (isset($_POST['btn_insert'])) {
+                $name=$_POST['name'];
+                if ($_FILES['file']['name']!='') {
+                    $img=$_FILES['file'];
+                    $image_name=$img['name'];
+                    move_uploaded_file($img['tmp_name'],"../image/".$image_name);
+                }else{
+                    $image_name=$_POST['img'];
+                }
+                
+                $address=$_POST['address'];
+                $tel=$_POST['tel'];
+                $email=$_POST['email'];
+                $fb=$_POST['fb'];
+                update_st($name,$image_name,$address,$tel,$email,$fb);
+            }
+            if (isset($_GET['id'])) {
+                $getdata=select_st();
+            }
+            $setting=select_st();
+            include 'setting/list.php';
             break;
         case 'thong_ke':
-            echo 'Thong ke ban a';
+            $load_thongke=load_thongke_diadiem();
+            foreach ($load_thongke as $data ) {
+                $address[]=$data['address'];
+                $tour[]=$data['Counttour'];
+            }
+            $load_thongke_loai=load_thongke_loai();
+            foreach ($load_thongke_loai as $data) {
+                $loai[]=$data['address'];
+                $tour_loai[]=$data['Counttour'];
+            }
+            include 'thongke/thongke.php';
             break;
         default:
             echo 'khong tim thay ';
