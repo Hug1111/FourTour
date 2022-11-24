@@ -23,7 +23,7 @@
                     <div class="ml-4">
                         <p>Dung Tuan</p>
                         <p>
-                            <a class="hover:text-blue-300" href="">Xem website</a>
+                            <a class="hover:text-blue-300" href="../index.php">Xem website</a>
                         </p>
                     </div>
                 </div>
