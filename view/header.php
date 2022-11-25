@@ -26,7 +26,7 @@
                     <div>
                         <ul class="w-full h-full my-auto flex justify-center items-center">
                             <li class="px-4 flex-col hover:text-red-400">
-                                <a href="home.html">Home</a>
+                                <a href="index.php">Home</a>
                                 <p class="w-1 mx-auto my-2 rounded-full text-center h-1 bg-orange-300"></p>
                             </li>
                             <li class="px-4 flex-col group/item hover:text-red-400"><a href="tour.html">Tour</a>

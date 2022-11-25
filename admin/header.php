@@ -8,6 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="../dist/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -60,8 +61,7 @@
                         </div>
                         <div class="flex items-center py-2 px-2  hover:border-b-2">
                             <i class="fas fa-table"></i>
-                            <!-- the loai tour -->
-                            <a class="px-1 hover:text-blue-300" href="index.php?act=the_loai">The loai Tour</a>
+                            <a class="px-1 hover:text-blue-300" href="index.php?act=the_loai">The loai</a>
                         </div>
                         <div class="flex items-center py-2 px-2  hover:border-b-2">
                             <i class="fab fa-servicestack"></i>
@@ -100,7 +100,7 @@
                 </div>
             </aside>
         </div>
-        <div class="bg-stone-100 ml-[253px] w-5/6 h-[1000px]">
+        <div class="ml-[253px] w-5/6">
             <article>
                 <!-- Info web -->
                 <div class="flex justify-end text-white bg-blue-500 py-4">

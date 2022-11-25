@@ -16,8 +16,9 @@ $theloai_top5=select_all_tl_top5();
 $tournew=tour_new();
 $danhmuc_diadiem_top_dow=select_top_dow();
 $danhmuc_diadiem_top_up=select_top_up();
+$danhmuc_diadiem_top_dow_1=select_top_dow_1();
 $tour_uudai=tour_uudai();
-$cate=select_all_t();
+$cate=select_all_t('');
 include 'view/header.php';
 if (isset($_GET['act'])) {
     $act=$_GET['act'];
@@ -41,11 +42,23 @@ if (isset($_GET['act'])) {
         case 'dangnhap':
             echo 'hello boi';
             break;
+        case 'destination':
+
+                include 'view/destination.php';
+                break;
+        case 'chitietdiemden':
+            if(isset($_GET['id'] )){
+                $id=$_GET['id'];
+                $diadiem_id=select_dd_one($id);
+            }
+            include 'view/chitietdiemden.php';
+        break;
         default:
             include 'view/home.php';
-            break;
+        break;
     }
-}
+}else {
 include 'view/home.php';
+}
 include 'view/footer.php';
 ?>
