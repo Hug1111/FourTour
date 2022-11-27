@@ -8,6 +8,7 @@ require_once '../model/diadiem.php';
 require_once '../model/tour.php';
 require_once '../model/setting.php';
 require_once '../model/erorr.php';
+require_once '../model/blog.php';
 
 include_once 'header.php';
 // Controller
@@ -381,7 +382,55 @@ if (isset($_GET['act'])) {
             echo 'Binh luan';
             break;
         case 'blog':
-            echo 'thong ke';
+            if (isset($_POST['btn_search'])) {
+                $kyw=$_POST['kyw'];
+            }else {
+                $kyw='';
+            }
+            $list_b=select_all_b($kyw);
+            include "blog/list.php";
+            break;
+        case 'add_b':
+            if (isset($_POST['btn_insert'])) {
+                $name=$_POST['name'];
+                $img=$_FILES['file'];
+                $image_name=$img['name'];
+                $noiDung=$_POST['noiDung'];
+                move_uploaded_file($img['tmp_name'],"../image/".$image_name);
+                insert_b($name,$image_name,$noiDung);
+                $tb='Thêm thành công';
+            }
+            include 'blog/add.php';
+            break;
+        case 'update_b':
+            if (isset($_POST['btn_update'])) {
+                $id=$_POST['id'];
+                $name=$_POST['name'];
+                $noiDung = $_POST['noiDung'];
+                if ($_FILES['file']['name']!='') {
+                    $img=$_FILES['file'];
+                    $image_name=$img['name'];
+                    move_uploaded_file($img['tmp_name'],"../image/".$image_name);
+                }else{
+                    $image_name=$_POST['img'];
+                }
+                update_b($id,$name,$noiDung,$image_name);
+            }
+            $list_b=select_all_b('');
+            include 'blog/list.php';
+            break;
+        case 'del_b':
+            if (isset($_GET['id'])) {
+                delete_b($_GET['id']);
+            }
+            $list_b=select_all_b('');
+            include 'blog/list.php';
+            break;
+        case 'edit_b':
+            if (isset($_GET['id'])) {
+                $blog = select_b_one($_GET['id']);
+            }
+            include 'blog/edit.php';
             break;
         case 'setting':
             if (isset($_POST['btn_insert'])) {
