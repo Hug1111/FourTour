@@ -12,7 +12,7 @@ require_once '../model/erorr.php';
 include_once 'header.php';
 // Controller
 // bien tong
-$list_dd=select_all_dd();
+$list_dd=select_all_dd('');
 $list_tl=select_all_tl();
 $list_ud=select_all_ud();
 if (isset($_GET['act'])) {
@@ -196,9 +196,55 @@ if (isset($_GET['act'])) {
             include 'uudai/list.php';
             break;
         case 'add_dd':
-            
+            if (isset($_POST['btn_insert'])) {
+                $name=$_POST['name'];
+                $img=$_FILES['file'];
+                $image_name=$img['name'];
+                $noiDung=$_POST['noiDung'];
+                move_uploaded_file($img['tmp_name'],"../image/".$image_name);
+                insert_dd($name,$image_name,$noiDung);
+                $tb='Thêm thành công';
+            }
+            include 'diaDiem/add.php';
             break;
         case 'dia_diem':
+            if (isset($_POST['btn_search'])) {
+                $kyw=$_POST['kyw'];
+            }else {
+                $kyw='';
+            }
+            $list_dd=select_all_dd($kyw);
+            include 'diaDiem/list.php';
+            break;
+        case 'del_dd':
+            if (isset($_GET['id'])) {
+                delete_dd($_GET['id']);
+            }
+            $list_dd=select_all_dd('');
+            include 'diaDiem/list.php';
+            break;
+        case 'update_dd':
+            if (isset($_POST['btn_update'])) {
+                $id=$_POST['id'];
+                $name=$_POST['name'];
+                $noiDung = $_POST['noiDung'];
+                if ($_FILES['file']['name']!='') {
+                    $img=$_FILES['file'];
+                    $image_name=$img['name'];
+                    move_uploaded_file($img['tmp_name'],"../image/".$image_name);
+                }else{
+                    $image_name=$_POST['img'];
+                }
+                update_dd($id,$name,$noiDung,$image_name);
+            }
+            $list_dd=select_all_dd('');
+            include 'diaDiem/list.php';
+            break;
+        case 'edit_dd':
+            if (isset($_GET['id'])) {
+                $diaDiem=select_dd_one($_GET['id']);
+            }
+            include 'diaDiem/edit.php';
             break;
         case 'add_t':
             if (isset($_POST['btn_insert'])) {
