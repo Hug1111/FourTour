@@ -9,6 +9,7 @@ require_once '../model/tour.php';
 require_once '../model/setting.php';
 require_once '../model/erorr.php';
 require_once '../model/blog.php';
+require_once '../model/binhluan.php';
 
 include_once 'header.php';
 // Controller
@@ -379,7 +380,21 @@ if (isset($_GET['act'])) {
             echo 'Don hang';
             break;
         case 'binh_luan':
-            echo 'Binh luan';
+            $list_b = select_all_b('');
+            if (isset($_POST['btn_search'])) {
+                $kyw=$_POST['kyw'];
+            }else {
+                $kyw='';
+            }
+            $list_bl=select_all_bl($kyw);
+            include 'binhluan/list.php';
+            break;
+        case 'del_bl':
+            if (isset($_GET['id'])) {
+                delete_bl($_GET['id']);
+            }
+            $list_bl=select_all_bl('');
+            include 'binhluan/list.php';
             break;
         case 'blog':
             if (isset($_POST['btn_search'])) {
