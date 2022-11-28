@@ -10,6 +10,7 @@ require_once '../model/setting.php';
 require_once '../model/erorr.php';
 require_once '../model/blog.php';
 require_once '../model/binhluan.php';
+require_once '../model/bill.php';
 
 include_once 'header.php';
 // Controller
@@ -377,7 +378,20 @@ if (isset($_GET['act'])) {
             echo 'Danh gia';
             break;
         case 'bill':
-            echo 'Don hang';
+            $list_bill = select_all_bill();
+            include "bill/list.php";
+            break;
+        case 'chapnhan':
+            $id=$_GET['id'];
+            chapnhan_bill($id);
+            $list_bill = select_all_bill();
+            include "bill/list.php";
+            break;
+        case 'huy':
+            $id=$_GET['id'];
+            huy_bill($id);
+            $list_bill = select_all_bill();
+            include "bill/list.php";
             break;
         case 'binh_luan':
             $list_b = select_all_b('');
